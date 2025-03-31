@@ -1,5 +1,5 @@
 Flask==2.3.2
-undetected-playwright==0.2.0
+undetected-playwright==0.3.0
 playwright==1.47.0
 beautifulsoup4
 openai
