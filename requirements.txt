@@ -1,5 +1,6 @@
 Flask==2.3.2
 undetected-playwright
+playwright
 beautifulsoup4
 openai
 requests-html
