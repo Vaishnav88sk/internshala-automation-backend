@@ -1,0 +1,10 @@
+Flask==2.3.2
+undetected-playwright
+beautifulsoup4
+openai
+requests-html
+rich
+lxml_html_clean
+pandas
+flask-cors
+# ... (any other dependencies from original requirements.txt)
