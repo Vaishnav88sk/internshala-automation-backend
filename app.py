@@ -114,7 +114,15 @@ CORS(app)
 # Initialize Playwright and Internshala bot
 with sync_playwright() as p:
     args = ["--disable-blink-features=AutomationControlled"]
-    browser = p.chromium.launch(args=args, headless=False)  
+    browser = p.chromium.launch(
+        headless=True,
+        args=[
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-gpu"
+        ]
+    )  
     intern = internshala(browser)
     gpt = chat(intern.gpt_browser)
     success = df_success()
