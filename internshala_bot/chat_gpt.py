@@ -1,9 +1,3 @@
-"""
-This file is a part of Internshala-bot Package. 
-Github - https://github.com/Eviltr0N/internshala-bot
-Written by - Mayank Lodhi
-"""
-
 from playwright.sync_api import sync_playwright, TimeoutError
 import json
 import os
@@ -20,9 +14,18 @@ class chat:
         self.gpt_check_asg_url = None
         config_dir = os.path.join(os.getcwd(), '.config')
         self.gpt_state_conf = os.path.join(config_dir, 'chat_gpt_state.json')
-        self.page = browser_inst.new_page()
+        self.browser = browser_inst
+        self.page = None
+
+    def init_page(self):
+        if self.page is None:
+            self.page = self.browser.new_page()
+
+
 
     def get_cover_letter(self, profile, company, about, skills, is_int_or_job):
+        self.init_page()
+
         prompt = cover_letter_prompt_format(profile, company, about, skills, is_int_or_job)
         if self.cover_letter_url is None:
             try:
@@ -70,6 +73,8 @@ class chat:
 
 
     def get_assignment_answer(self, profile, company, about, skills, question, is_int_or_job):
+        self.init_page()
+
         prompt = assignment_prompt_format(profile, company, about, skills, question, is_int_or_job)
 
         if self.assignment_url is None:
@@ -108,6 +113,7 @@ class chat:
         return resp
 
     def assmnt_is_valid(self, profile, question, is_int_or_job):
+        self.init_page()
         prompt = assignment_validation_prompt(profile, question, is_int_or_job)
         if self.gpt_check_asg_url is None:
             try:
